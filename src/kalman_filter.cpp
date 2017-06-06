@@ -60,6 +60,8 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
   MatrixXd PHt = P_ * Ht;
   MatrixXd K = PHt * Si;
 
+  y(1) = std::atan2(sin( y(1)), cos( y(1) ));
+
   //new estimate
   x_ = x_ + (K * y);
   long x_size = x_.size();

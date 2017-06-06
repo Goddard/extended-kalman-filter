@@ -59,7 +59,7 @@ FusionEKF::~FusionEKF() {}
 void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
   if (!is_initialized_) {
     ekf_.x_ = VectorXd(4);
-    ekf_.x_ << 1, 1, 1, 1;
+    ekf_.x_ << 0, 0, 0, 0;
 
     if (measurement_pack.sensor_type_ == MeasurementPackage::LASER) {
       /**
@@ -74,8 +74,8 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
       float ro = measurement_pack.raw_measurements_(0);
       float phi = measurement_pack.raw_measurements_(1);
       float ro_dot = measurement_pack.raw_measurements_(2);
-      ekf_.x_(0) = ro * cos(phi);
-      ekf_.x_(1) = ro * sin(phi);
+      ekf_.x_(0) = 0; //ro * cos(phi);
+      ekf_.x_(1) = 0; //ro * sin(phi);
       ekf_.x_(2) = ro_dot * cos(phi);
       ekf_.x_(3) = ro_dot * sin(phi);
     }
